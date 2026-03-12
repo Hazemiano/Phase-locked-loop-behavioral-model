@@ -18,7 +18,6 @@ module VCO(VCTRL,VOUT,AVDD,AVSS);
         inout AVDD, AVSS; 
 	voltage VCTRL,VOUT;
 	electrical AVDD, AVSS;
-	// *** add line here ***
       real VOUT_i, phase, freq,sine;
 
 	analog begin
@@ -26,11 +25,9 @@ module VCO(VCTRL,VOUT,AVDD,AVSS);
 		// compute the freq from the input voltage
 		freq =((V(VCTRL) - Vmin)*(Fmax - Fmin) / (Vmax - Vmin)) + Fmin;
 		// bound the frequency
-		// *** add line here ***
 		if (freq < Fmin) freq = Fmin;
 		if(freq > Fmax) freq = Fmax;
 		// calculate the phase (modulo 2*pi)
-		// *** add line here ***
 		phase= 2*3.141592654*idtmod(freq,0,1,-0.5);
 		// generate the output
 		sine = sin(phase);
@@ -39,16 +36,13 @@ module VCO(VCTRL,VOUT,AVDD,AVSS);
 			;
 			
 		if (sine > 0) 
-			// *** add line here ***
                         VOUT_i=1;
 		else 
-			// *** add line here ***
                        VOUT_i=0;
 		
 		V(VOUT) <+ transition(VOUT_i,td,trise,tfall);
 	
 		// bound the time step
-		// *** add line here ***
                 $bound_step(0.1/freq);
 		
 	end
