@@ -16,17 +16,14 @@ module Divider(VIN,VOUT,AVDD,AVSS);
 	parameter real tt=10p from (0:inf);	// transition time of output signal
 	parameter real td=0 from [0:inf);	// average delay from input to output
 	
-	// *** add line here ***
 	real out_value=0;
         integer count=0;
 	analog begin
     	@(cross(V(VIN) - vth, 1)) begin
 			if (count==floor(ratio/2))				
 				out_value = vh;
-			// *** add line here ***
                      if(count==ratio) begin
 				out_value = vl;
-				// *** add line here ***
                               count=0;
 			end
 			count = count + 1;			
